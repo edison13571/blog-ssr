@@ -1,0 +1,9 @@
+$vh:100vh;
+$nav-height:60px;
+$foot-height:60px;
+
+@mixin flexJustify($algin: center) {
+  display: flex;
+  justify-content: $algin;
+  align-items: center;
+}
