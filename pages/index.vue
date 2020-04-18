@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-     <div>首页{{msg}}</div>
+      <div>你好，iam66。这是一个关于66的随便写写的网站。</div>
     </div>
   </div>
 </template>
@@ -13,18 +13,16 @@ import { Component, Vue } from 'nuxt-property-decorator';
 
 @Component({})
 export default class Index extends Vue {
-  msg:string = ''
   mounted(){
-    this.$axios.get('http://129.211.51.250:3000/api/users/test').then((res:any)=>{
-      this.msg = res.data.msg
+    this.$axios.get('https://api.iam66.com/api/users/test').then((res:any)=>{
       console.log(res)
     })
   }
   head(){
     return{
-      title:'im66 blog',//页面的title
+      title:'im66',//页面的title
       meta:[
-        {hid:'description',name:'blog',content:'This is blog page'}
+        {hid:'description',name:'iam66',content:'This is blog page'}
       ]//hid是覆盖，
     }
   }

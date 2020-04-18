@@ -6,10 +6,18 @@ li {
 body {
   margin: 0;
   padding: 0;
+  font-family: 'aliPuHui';
 }
 
 a {
   color: black;
   text-decoration: none;
+}
+
+@font-face {
+  font-family: 'aliPuHui';
+  src:url("../fonts/Alibaba-PuHuiTi-Regular.ttf");
+  font-style: normal;
+  font-weight: normal;
 }
 

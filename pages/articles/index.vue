@@ -1,15 +1,59 @@
 <template>
   <div class="container">
     <div>
-     articles
+      <Unit v-for="item in articles" :key="item.id" :info="item" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+  import { Component, Vue } from 'nuxt-property-decorator';
+  import Unit from '../../components/articlesListUnit'
 
-export default Vue.extend({})
+  interface article{
+    id:number;
+    label:string;
+    recommend:string;
+    date:string;
+    tags:string[];
+  }
+
+  @Component({
+    components: {
+      Unit
+    }
+  })
+  export default class Articles extends Vue {
+    articles:article[] = [];
+    created(){
+      this.getList()
+    }
+    getList(){
+      let num:number = 3;
+      let arr:article[] = [];
+      function makeUnit(id:number):article {
+        return {
+          id: id,
+          label: '标题' + id,
+          recommend: '推荐语' + id,
+          date: '2020-4-15',
+          tags: ['标签','标签']
+        }
+      }
+      for (let i = 0 ; i < num; i++) {
+        arr.push(makeUnit(i+1));
+      }
+      this.articles = arr;
+    }
+    head(){
+      return{
+        title:'im66',//页面的title
+        meta:[
+          {hid:'description',name:'iam66文章列表',content:'This is articles page'}
+        ]//hid是覆盖，
+      }
+    }
+  }
 </script>
 
 <style>

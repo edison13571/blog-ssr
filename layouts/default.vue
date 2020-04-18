@@ -1,7 +1,8 @@
 <template>
   <div>
     <HeaderT/>
-    <div class="temp"><div>博客开发中。。。敬请期待</div>当前页面：<nuxt /></div>
+    <!--<div class="temp"><div>博客开发中。。。敬请期待</div>当前页面：<nuxt /></div>-->
+    <div class="temp"><nuxt /></div>
     <Footer/>
   </div>
 </template>
