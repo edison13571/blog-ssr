@@ -12,7 +12,7 @@ export default class ArticlesListUnit extends Vue {
   @Prop() info!: article;
 
   public render() {
-    return <router-link to={"/articles/"+this.info.id}>
+    return <router-link to={"/articles/"+this.info.label}>
       <section>
         <h3>{this.info.label}</h3>
         <p>{this.info.recommend}</p>
