@@ -34,7 +34,7 @@
       function makeUnit(id:number):article {
         return {
           id: id,
-          label: 'README',
+          label: id===1?'README':'TEST',
           recommend: '推荐语' + id,
           date: '2020-4-15',
           tags: ['标签','标签']

@@ -2,14 +2,6 @@
   <div class="container">
     <div class="article-content">
       <div v-html="htmlMD"></div>
-      <!--<div>articles {{info.id}}</div>-->
-      <!--<div>{{info.label}}</div>-->
-      <!--<div>{{info.recommend}}</div>-->
-      <!--<div>{{info.content}}</div>-->
-      <!--<div>-->
-        <!--<span>{{info.date}}</span>-->
-        <!--<span v-for="(item,index) in info.tags" :key="index">{{item}}</span>-->
-      <!--</div>-->
     </div>
 
   </div>
@@ -18,21 +10,14 @@
 <script lang="ts">
   import { Component, Vue } from 'nuxt-property-decorator';
   import marked from 'marked'
-  @Component({
-    // components: VueMarkdown
-  })
+  @Component({})
   export default class Article extends Vue{
-    title:number|string = 0;
+    title:string = '';
     htmlMD:string = '';
-    created(){
-      this.title = this.$route.params.title
-      this.getDetail(this.title)
-    }
-    getDetail(name:string){
-      const url = `./doc/${name}.md`;
-      this.$axios.get(url).then((response) => {
-        this.htmlMD = marked(response.data)
-      });
+    async asyncData ({$axios, params}:any) {
+      const url = `./doc/${params.title}.md`;
+      const { data } = await $axios.get(url)
+      return {htmlMD:marked(data),title:params.title}
     }
     head(){
       return{
