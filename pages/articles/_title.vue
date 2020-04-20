@@ -15,7 +15,7 @@
     title:string = '';
     htmlMD:string = '';
     async asyncData ({$axios, params}:any) {
-      const url = `https://iam66.com/doc/${params.title}.md`;
+      const url = `/doc/${params.title}.md`;
       const { data } = await $axios.get(url)
       return {htmlMD:marked(data),title:params.title}
     }
