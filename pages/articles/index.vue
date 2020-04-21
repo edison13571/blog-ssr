@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div>
+    <div class="wrap">
       <Unit v-for="item in articles" :key="item.id" :info="item" />
     </div>
   </div>
@@ -11,11 +11,12 @@
   import Unit from '../../components/articlesListUnit'
 
   interface article{
-    id:number;
-    label:string;
-    recommend:string;
-    date:string;
+    _id:string;
+    title:string;
+    words:string;
+    createdDate:string;
     tags:string[];
+    location:string;
   }
 
   @Component({
@@ -25,25 +26,11 @@
   })
   export default class Articles extends Vue {
     articles:article[] = [];
-    created(){
-      this.getList()
-    }
-    getList(){
-      let num:number = 3;
-      let arr:article[] = [];
-      function makeUnit(id:number):article {
-        return {
-          id: id,
-          label: id===1?'README':'TEST',
-          recommend: '推荐语' + id,
-          date: '2020-4-15',
-          tags: ['标签','标签']
-        }
-      }
-      for (let i = 0 ; i < num; i++) {
-        arr.push(makeUnit(i+1));
-      }
-      this.articles = arr;
+    total:number = 0;
+    async asyncData ({$axios}:any) {
+      const url = `https://api.iam66.com/api/articles/list`;
+      const { data } = await $axios.get(url)
+      return {articles:data.data.list,total:data.data.total}
     }
     head(){
       return{
@@ -56,6 +43,12 @@
   }
 </script>
 
-<style>
-
+<style lang="scss">
+.wrap{
+  width: 600px;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
 </style>

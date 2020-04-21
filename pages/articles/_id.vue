@@ -13,17 +13,21 @@
   @Component({})
   export default class Article extends Vue{
     title:string = '';
+    words:string = '';
     htmlMD:string = '';
-    async asyncData ({$axios, params}:any) {
-      const url = `https://api.iam66.com/doc/${params.title}.md`;
-      const { data } = await $axios.get(url)
-      return {htmlMD:marked(data),title:params.title}
+    async asyncData ({ $axios, params}:any) {
+      const url = `https://api.iam66.com/api/articles/detail?id=${params.id}`;
+      const res = await $axios.get(url);
+      const info = res.data.data;
+      const locationUrl = `https://api.iam66.com/${info.location}.md`;
+      const { data } = await $axios.get(locationUrl)
+      return {htmlMD:marked(data),title:info.title,words:info.words}
     }
     head(){
       return{
         title:this.title,//页面的title
         meta:[
-          {hid:'description',name:this.title,content:this.title}
+          {hid:'description',name:this.title,content:this.words}
         ]//hid是覆盖，
       }
     }
@@ -34,5 +38,8 @@
 .article-content{
   width: 80%;
   margin: 0 auto;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
 }
 </style>

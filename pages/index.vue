@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div>
+    <div class="temp">
       <div>你好，iam66。这是一个关于66的随便写写的网站。</div>
     </div>
   </div>
@@ -13,11 +13,6 @@ import { Component, Vue } from 'nuxt-property-decorator';
 
 @Component({})
 export default class Index extends Vue {
-  mounted(){
-    this.$axios.get('https://api.iam66.com/api/users/test').then((res:any)=>{
-      console.log(res)
-    })
-  }
   head(){
     return{
       title:'im66',//页面的title

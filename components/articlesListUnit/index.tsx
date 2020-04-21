@@ -1,23 +1,25 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import './index.scss';
+import moment from 'moment'
 interface article{
-  id:number;
-  label:string;
-  recommend:string;
-  date:string;
+  _id:string;
+  title:string;
+  words:string;
+  createdDate:string;
   tags:string[];
+  location:string;
 }
 @Component({})
 export default class ArticlesListUnit extends Vue {
   @Prop() info!: article;
 
   public render() {
-    return <router-link to={"/articles/"+this.info.label}>
-      <section>
-        <h3>{this.info.label}</h3>
-        <p>{this.info.recommend}</p>
+    return <router-link to={"/articles/"+this.info._id}>
+      <section class="article-unit">
+        <h2>{this.info.title}</h2>
+        <p>{this.info.words}</p>
         <div>
-          < span>{this.info.date}</span>
+          < span>{moment(this.info.createdDate).format('YYYY-MM-DD HH:mm:ss')}</span>
           {
             this.info.tags.map((tag)=>{
               return (<span>{tag}</span>)
