@@ -31,6 +31,9 @@
 <style lang="scss">
   .header{
     background-color: #ffffff;
+    li {
+      list-style: none;
+    }
   }
   .nav {
     padding: 0 20px;

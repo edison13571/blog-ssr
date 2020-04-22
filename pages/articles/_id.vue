@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="article-content">
-      <div v-html="htmlMD"></div>
+    <div class="article-content ">
+      <div v-html="htmlMD" class="markdown-body"></div>
     </div>
 
   </div>
@@ -10,6 +10,7 @@
 <script lang="ts">
   import { Component, Vue } from 'nuxt-property-decorator';
   import marked from 'marked'
+  import '../../assets/styles/css/github-markdown.css'
   @Component({})
   export default class Article extends Vue{
     title:string = '';
@@ -20,7 +21,7 @@
       const res = await $axios.get(url);
       const info = res.data.data;
       const locationUrl = `https://api.iam66.com/${info.location}.md`;
-      const { data } = await $axios.get(locationUrl)
+      const {data} = await $axios.get(locationUrl)
       return {htmlMD:marked(data),title:info.title,words:info.words}
     }
     head(){
@@ -42,4 +43,5 @@
   display: flex;
   flex-direction: column;
 }
+
 </style>
