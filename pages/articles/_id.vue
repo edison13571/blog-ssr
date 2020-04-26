@@ -11,18 +11,19 @@
   import { Component, Vue } from 'nuxt-property-decorator';
   import marked from 'marked'
   import '../../assets/styles/css/github-markdown.css'
+  import {getArticlesDetail, getArticlesContent, getArticlesAddView} from '../../api/articles'
   @Component({})
   export default class Article extends Vue{
     title:string = '';
     words:string = '';
     htmlMD:string = '';
-    async asyncData ({ $axios, params}:any) {
-      const url = `https://api.iam66.com/api/articles/detail?id=${params.id}`;
-      const res = await $axios.get(url);
-      const info = res.data.data;
-      const locationUrl = `https://api.iam66.com/${info.location}.md`;
-      const {data} = await $axios.get(locationUrl)
-      return {htmlMD:marked(data),title:info.title,words:info.words}
+    async asyncData ({params}:any) {
+      const {data} = await getArticlesDetail({id:params.id});
+      const html = await getArticlesContent(data.location)
+      return {htmlMD:marked(html),title:data.title,words:data.words}
+    }
+    mounted(){
+      getArticlesAddView({id:this.$route.params.id})
     }
     head(){
       return{

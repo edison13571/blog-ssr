@@ -9,14 +9,17 @@
 <script lang="ts">
   import { Component, Vue } from 'nuxt-property-decorator';
   import Unit from '../../components/articlesListUnit'
+  import {getArticlesList} from  '../../api/articles'
 
   interface article{
     _id:string;
     title:string;
     words:string;
-    createdDate:string;
+    createdDate:number;
+    updatedDate:number;
     tags:string[];
     location:string;
+    views:number;
   }
 
   @Component({
@@ -27,10 +30,20 @@
   export default class Articles extends Vue {
     articles:article[] = [];
     total:number = 0;
-    async asyncData ({$axios}:any) {
-      const url = `https://api.iam66.com/api/articles/list`;
-      const { data } = await $axios.get(url)
-      return {articles:data.data.list,total:data.data.total}
+    async asyncData () {
+      const { data } = await getArticlesList()
+      return {articles:data.list,total:data.total}
+    }
+    mounted(){
+      let owner = window.localStorage.getItem('6')
+      if (owner && owner === '6') {
+        this.getOnwerList()
+      }
+    }
+    async getOnwerList(){
+      const { data } = await getArticlesList({},true)
+      this.articles = data.list
+      this.total= data.total
     }
     head(){
       return{
