@@ -19,6 +19,7 @@
     updatedDate:number;
     tags:string[];
     location:string;
+    series:string;
     views:number;
   }
 
