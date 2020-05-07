@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-wrap">
     <HeaderT/>
     <nuxt />
     <!--<div class="temp"><div>博客开发中。。。敬请期待</div>当前页面：<nuxt /></div>-->
@@ -27,6 +27,10 @@
 </script>
 
 <style lang="scss">
+  .main-wrap{
+    position: relative;
+    padding-top: 60px;
+  }
 .temp{
   width: 100%;
   min-height: calc(100vh - 120px);

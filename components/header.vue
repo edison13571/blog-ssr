@@ -31,6 +31,12 @@
 <style lang="scss">
   .header{
     background-color: #ffffff;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 66;
     li {
       list-style: none;
     }
