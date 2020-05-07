@@ -18,7 +18,7 @@ export default class ArticlesListUnit extends Vue {
   @Prop() info!: article;
 
   public render() {
-    return <router-link to={"/articles/"+this.info._id}>
+    return <router-link to={"/articles/"+this.info._id} target="_blank"  tag="a">
       <section class="article-unit">
         <h2>{this.info.title}</h2>
         <p>{this.info.words}</p>

@@ -12,7 +12,7 @@
         <div v-html="htmlMD" class="markdown-body"></div>
       </div>
     </div>
-
+    <PageNav/>
   </div>
 </template>
 
@@ -22,11 +22,16 @@
   import '../../assets/styles/css/github-markdown.css'
   import {getArticlesDetail, getArticlesContent, getArticlesAddView} from '../../api/articles'
   import {getHTitles} from '../../utils/articles'
+  import PageNav from '../../components/pageNav'
   interface catalogUnit{
     level:number,
     title:string
   }
-  @Component({})
+  @Component({
+    components: {
+      PageNav
+    }
+  })
   export default class Article extends Vue{
     title:string = '';
     words:string = '';
@@ -38,7 +43,7 @@
       return {htmlMD:marked(html),title:data.title,words:data.words}
     }
     mounted(){
-      getArticlesAddView({id:this.$route.params.id})
+      // getArticlesAddView({id:this.$route.params.id})
       this.catalog = getHTitles(this.htmlMD)
     }
     sideClick (eleId:string) {
