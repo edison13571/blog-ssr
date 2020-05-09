@@ -43,7 +43,7 @@
       return {htmlMD:marked(html),title:data.title,words:data.words}
     }
     mounted(){
-      // getArticlesAddView({id:this.$route.params.id})
+      getArticlesAddView({id:this.$route.params.id})
       this.catalog = getHTitles(this.htmlMD)
     }
     sideClick (eleId:string) {
